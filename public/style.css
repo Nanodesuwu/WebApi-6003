@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#pokemon-list {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.pokemon-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.pokemon-item img {
+    width: 100px;
+    height: 100px;
+}
+
+#pokemon-details {
+    margin-top: 20px;
+}
+
+#pokemon-details img {
+    width: 200px;
+    height: 200px;
+}
+
+.hidden {
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.evolution-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.evolution-step {
+    text-align: center;
+    margin: 0 10px; /* Adjust spacing between evolution steps */
+}
+
+.arrow {
+    margin: 0 5px; /* Adjust spacing between arrows and images */
+    font-size: 18px; /* Adjust arrow size */
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.stat-value {
+    margin-right: 10px;
+}
+
+.stat-fill {
+    height: 20px;
+    background-color: #4CAF50;
+}
+

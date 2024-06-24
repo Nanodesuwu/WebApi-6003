@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 50px; /* Adjusted to create space for the fixed back button */
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .pokemon-item img {
+            width: 100px;
+            height: 100px;
+        }
+        .pokemon-item {
+            margin: 5px;
+        }
+        #back-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000; /* Ensure it's above other content */
+            background-color: #007bff; /* Bootstrap primary button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            border-radius: 5px;
+        }
+        #back-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <button id="back-button" onclick="window.location.href='/index.html'">Back</button>
+    <h2>History</h2>
+    <table id="history-table">
+        <thead>
+            <tr>
+                <th>Pokemon</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Total Base Stats</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="history-list">
+            <!-- History data will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        async function fetchHistory() {
+            try {
+                const response = await fetch('/historyData');
+                if (response.ok) {
+                    const historyData = await response.json();
+                    displayHistory(historyData);
+                } else {
+                    console.error('Failed to fetch history data');
+                }
+            } catch (error) {
+                console.error('Error fetching history data', error);
+            }
+        }
+
+        function displayHistory(historyData) {
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';
+            historyData.forEach(entry => {
+                const row = document.createElement('tr');
+                row.className = 'pokemon-item';
+                row.innerHTML = `
+                    <td><img src="${entry.imageUrl}" alt="${entry.pokemonName}"></td>
+                    <td><a href="details.html?name=${entry.pokemonName}" class="pokemon-name">${entry.pokemonName}</a></td>
+                    <td>${entry.typing}</td>
+                    <td>${entry.totalBaseStats}</td>
+                    <td><button onclick="deleteHistoryEntry('${entry.pokemonName}')">Delete</button></td>
+                `;
+                historyList.appendChild(row);
+            });
+        }
+
+        async function deleteHistoryEntry(pokemonName) {
+            try {
+                const response = await fetch(`/deleteHistory?name=${pokemonName}`, {
+                    method: 'DELETE'
+                });
+                if (response.ok) {
+                    console.log(`${pokemonName} deleted from history`);
+                    fetchHistory(); // Refresh the history list
+                } else {
+                    console.error(`Failed to delete ${pokemonName} from history`);
+                }
+            } catch (error) {
+                console.error('Error deleting history entry', error);
+            }
+        }
+
+        fetchHistory();
+    </script>
+</body>
+</html>

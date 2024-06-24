@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+</head>
+<body>
+    <form class="form_main" action="/login" method="POST">
+        <p class="heading">Login</p>
+        <div class="inputContainer">
+            <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon"></svg>
+            <input placeholder="Username" name="username" class="inputField" type="text" required>
+        </div>
+        
+        <div class="inputContainer">
+            <svg viewBox="0 0 16 16" fill="#2e2e2e" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="inputIcon"></svg>
+            <input placeholder="Password" name="password" class="inputField" type="password" required>
+        </div>
+                   
+        <button id="button" type="submit">Submit</button>
+        <div class="signupContainer">
+            <p>Don't have an account?</p>
+            <a href="register.html">Sign up</a>
+        </div>
+    </form>
+</body>
+</html>
